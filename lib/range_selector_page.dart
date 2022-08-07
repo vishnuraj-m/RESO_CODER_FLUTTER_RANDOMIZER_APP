@@ -26,7 +26,7 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
                 labelText: 'Minimum',
                 intValueSetter: (value) => _min = value,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               RangeSelectorTextFormField(
