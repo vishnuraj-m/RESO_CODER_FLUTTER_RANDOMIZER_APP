@@ -8,6 +8,8 @@ class RangeSelectorPage extends StatefulWidget {
 }
 
 class _RangeSelectorPageState extends State<RangeSelectorPage> {
+  int _min = 0;
+  int _max = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,28 +22,16 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Minimum',
-                ),
-                keyboardType: TextInputType.numberWithOptions(
-                  decimal: false,
-                  signed: true,
-                ),
+              RangeSelectorTextFormField(
+                labelText: 'Minimum',
+                intValueSetter: (value) => _min = value,
               ),
               SizedBox(
                 height: 12,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Maximum',
-                ),
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: false,
-                  signed: true,
-                ),
+              RangeSelectorTextFormField(
+                labelText: 'Maximum',
+                intValueSetter: (value) => _max = value,
               ),
             ],
           ),
@@ -54,6 +44,31 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
           // TODO: Navigate to the generator page
         },
       ),
+    );
+  }
+}
+
+class RangeSelectorTextFormField extends StatelessWidget {
+  const RangeSelectorTextFormField({
+    required this.labelText,
+    required this.intValueSetter,
+    Key? key,
+  }) : super(key: key);
+  final String labelText;
+  final void Function(int value) intValueSetter;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: labelText,
+      ),
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: false,
+        signed: true,
+      ),
+      onSaved: (newValue) => intValueSetter(int.parse(newValue ?? '')),
     );
   }
 }
