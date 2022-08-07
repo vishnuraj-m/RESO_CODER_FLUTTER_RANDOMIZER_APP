@@ -64,10 +64,17 @@ class RangeSelectorTextFormField extends StatelessWidget {
         border: OutlineInputBorder(),
         labelText: labelText,
       ),
-      keyboardType: TextInputType.numberWithOptions(
+      keyboardType: const TextInputType.numberWithOptions(
         decimal: false,
         signed: true,
       ),
+      validator: (value) {
+        if (value == null || int.parse(value) == null) {
+          return 'Must be an integer';
+        } else {
+          return null;
+        }
+      },
       onSaved: (newValue) => intValueSetter(int.parse(newValue ?? '')),
     );
   }
