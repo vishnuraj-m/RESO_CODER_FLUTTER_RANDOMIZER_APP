@@ -3,6 +3,7 @@
 A new Flutter project.
 
 ## Getting Started
+![Design preview ](./src/01.PNG)
 
 This project is a starting point for a Flutter application.
 
